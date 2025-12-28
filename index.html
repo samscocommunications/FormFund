@@ -81,6 +81,7 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#how-it-works" class="text-slate-600 hover:text-brand-600 font-medium transition hover:-translate-y-0.5">How it Works</a>
                     <a href="#features" class="text-slate-600 hover:text-brand-600 font-medium transition hover:-translate-y-0.5">Features</a>
+                    <a href="#login" class="text-slate-600 hover:text-brand-600 font-medium transition hover:-translate-y-0.5">Login</a>
                     <a href="https://t.me/FormFundBot" target="_blank" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-full font-semibold transition shadow-lg hover:shadow-brand-500/30 flex items-center gap-2 hover:scale-105 active:scale-95">
                         <i data-lucide="send" class="w-4 h-4"></i> Launch Bot
                     </a>
@@ -237,6 +238,32 @@
         </div>
     </section>
 
+    <!-- Login Section -->
+    <section id="login" class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal-on-scroll reveal-hidden">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Login with Telegram</h2>
+                <p class="text-slate-600">Connect your Telegram account to access FormFund features</p>
+            </div>
+            
+            <div class="reveal-on-scroll reveal-hidden delay-100 bg-slate-50 p-10 md:p-16 rounded-2xl border border-slate-200 flex flex-col items-center justify-center gap-6 hover:border-brand-300 hover:shadow-xl transition-all duration-300">
+                <div class="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center text-brand-600">
+                    <i data-lucide="log-in" class="w-8 h-8"></i>
+                </div>
+                
+                <!-- Telegram Login Widget will appear here -->
+                <script async src="https://telegram.org/js/telegram-widget.js?22" 
+                        data-telegram-login="FormFundBot" 
+                        data-size="large" 
+                        data-radius="8"
+                        data-onauth="onTelegramAuth(user)" 
+                        data-request-access="write"></script>
+                
+                <p class="text-slate-500 text-sm mt-4">By logging in, you agree to our terms of service</p>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="py-20 overflow-hidden">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -281,6 +308,30 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Callback function when user authenticates via Telegram
+        function onTelegramAuth(user) {
+            console.log('Telegram user data:', user);
+            alert('✅ Successfully logged in as ' + user.first_name + ' ' + (user.last_name || '') + '\n' +
+                  'User ID: ' + user.id + '\n' +
+                  (user.username ? 'Username: @' + user.username : ''));
+            
+            // Send user data to your backend server
+            // Example:
+            // fetch('/auth/telegram', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(user)
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log('Server response:', data);
+            //     // Redirect to dashboard or update UI
+            // })
+            // .catch(error => console.error('Error:', error));
+        }
+    </script>
 
     <!-- Initialize Icons -->
     <script>
